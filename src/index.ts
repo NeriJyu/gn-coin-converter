@@ -1,13 +1,17 @@
 import express, { NextFunction, Response, Request } from "express";
 import "express-async-errors";
 import cors from "cors";
+import bodyParser from "body-parser";
 import "dotenv/config";
 import { routes } from "./routes/index.routes";
 
 const app = express();
 app.use(cors());
-app.use(express.json());
-
+app.use(
+  bodyParser.json({
+    limit: "50mb",
+  })
+);
 app.use(routes);
 app.use(
   (err: Error, _request: Request, response: Response, _next: NextFunction) => {
