@@ -11,7 +11,11 @@
   "servers": [
     {
       "url": "http://localhost:8091/",
-      "description": "API"
+      "description": "Local"
+    },
+    {
+      "url": "https://gn-coin-converter.onrender.com/",
+      "description": "Production"
     }
   ],
   "paths": {
