@@ -1,0 +1,263 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GN Coin Converter",
+    "description": "API para converter valores entre moedas",
+    "contact": {
+      "email": "gustavoneri20@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8091/",
+      "description": "API"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Realizar o login no sistema",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "ref": "#/components/schemas/Auth"
+              },
+              "examples": {
+                "auth": {
+                  "value": {
+                    "email": "gustavoneri20@hotmail.com",
+                    "password": "ABC123def456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token de login gerado"
+          },
+          "400": {
+            "description": "Email ou senha não informado"
+          },
+          "401": {
+            "description": "Credenciais inválidas"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Criar um usuário no sistema",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gustavo Neri",
+                    "email": "gustavoneriswagger@hotmail.com",
+                    "password": "ABC123def456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email ou senha não informado"
+          },
+          "409": {
+            "description": "Email já está em uso"
+          }
+        }
+      }
+    },
+    "/exchange-rates/convert": {
+      "post": {
+        "summary": "Realiza a conversão de valores entre duas moedas e salva no banco as informações da conversão",
+        "tags": ["Exchange Rates"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "ref": "#/components/schemas/ExchangeRates"
+              },
+              "examples": {
+                "exchangeRates": {
+                  "value": {
+                    "amount": "50",
+                    "from": "BRL",
+                    "to": "USD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversão realizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ExchangeRates"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Valores inválidos ou falta de envio"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Encontrar transações por um id de usuário",
+        "tags": ["Transaction"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "default": "1",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transações encontradas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Id do usuário não enviado"
+          },
+          "404": {
+            "description": "Transações não encontradas"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "email", "password"]
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "source_currency": {
+            "type": "string"
+          },
+          "origin_value": {
+            "type": "string"
+          },
+          "conversion_rate": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "destination_currency": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "user_id",
+          "source_currency",
+          "origin_value",
+          "conversion_rate",
+          "date",
+          "destination_currency"
+        ]
+      },
+      "ExchangeRates": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "source_currency": {
+            "type": "string"
+          },
+          "origin_value": {
+            "type": "string"
+          },
+          "conversion_rate": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "destination_currency": {
+            "type": "string"
+          },
+          "target_value": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
