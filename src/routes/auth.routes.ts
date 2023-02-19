@@ -40,37 +40,4 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-// authRouter.post("/login", async (req, res) => {
-//   const credentials: any = req.body;
-
-//   if (!credentials.email)
-//     return res.status(400).send({
-//       status: "ERROR",
-//       err: "An error occurred during login",
-//       message: "Missing Parameters: E-mail",
-//     });
-
-//   if (!credentials.password)
-//     return res.status(400).send({
-//       status: "ERROR",
-//       err: "An error occurred during login",
-//       message: "Missing Parameters: Password",
-//     });
-//   console.log("1");
-
-//   const auth = await authController.login(credentials);
-
-//   console.log("2", auth);
-
-//   if (!auth)
-//     return res.status(401).send({
-//       message: "Invalid credentials",
-//     });
-
-//   res.status(200).send({
-//     status: "OK",
-//     data: auth,
-//   });
-// });
-
 export default authRouter;

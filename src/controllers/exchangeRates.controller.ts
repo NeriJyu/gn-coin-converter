@@ -1,6 +1,6 @@
 import { I_FindConvert } from "../interfaces/exchangeRates.interfaces";
 import { I_User } from "../interfaces/user.interfaces";
-import TransactionRepositorie from "../repositories/transactions.repositorie";
+import TransactionRepositorie from "../repositories/transaction.repositorie";
 import ExchangeRatesAPIService from "../services/exchangeRates.service";
 
 class ExchangeRatesController {

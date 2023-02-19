@@ -10,7 +10,7 @@ class ExchangeRatesAPIService {
           `https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`,
           {
             headers: {
-              apikey: "XGloAQ6bcvnyK8BASAlLK6bxRpSsYtEp",
+              apikey: process.env.EXCHANGERATES_API_KEY,
             },
           }
         );

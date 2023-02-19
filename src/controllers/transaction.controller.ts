@@ -1,5 +1,5 @@
-import { I_Transaction } from "../interfaces/transactions.interfaces";
-import TransactionRepositorie from "../repositories/transactions.repositorie";
+import { I_Transaction } from "../interfaces/transaction.interfaces";
+import TransactionRepositorie from "../repositories/transaction.repositorie";
 
 class TransactionController {
   private transactionRepositorie = new TransactionRepositorie();

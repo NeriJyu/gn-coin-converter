@@ -9,8 +9,6 @@ const userController = new UserController();
 // CREATE USER
 userRouter.post("/", async (req, res) => {
   try {
-    console.log("passou");
-
     const user: I_CreateUser = req.body;
 
     const newUser = await userController.createUser(user);

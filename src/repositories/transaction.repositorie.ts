@@ -2,7 +2,7 @@ import { dbQuery, dbQueryFirst } from "../config/db";
 import {
   I_CreateTransaction,
   I_Transaction,
-} from "../interfaces/transactions.interfaces";
+} from "../interfaces/transaction.interfaces";
 
 class TransactionRepositorie {
   findTransactionsByUserId(user_id: number): Promise<I_Transaction[]> {

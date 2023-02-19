@@ -1,4 +1,4 @@
-import TransactionRepositorie from "../repositories/transactions.repositorie";
+import TransactionRepositorie from "../repositories/transaction.repositorie";
 
 // Find transactions by user id
 describe("Find transactions by user id", () => {
