@@ -11,6 +11,9 @@ userRouter.post("/", async (req, res) => {
   try {
     const user: I_CreateUser = req.body;
 
+    if (!user.email) throw "Email was not informed!";
+    if (!user.password) throw "Password was not informed!";
+
     const newUser = await userController.createUser(user);
 
     res.status(201).send({

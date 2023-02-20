@@ -32,6 +32,30 @@ class ExchangeRatesAPIService {
       }
     });
   }
+
+  getLatest(from: string): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const latest = await this.axios.get(
+          `https://api.apilayer.com/exchangerates_data/latest?base=${from}`,
+          {
+            headers: {
+              apikey: process.env.EXCHANGERATES_API_KEY,
+            },
+          }
+        );
+
+        resolve(latest.data);
+      } catch (err: any) {
+        let error = err;
+
+        if (err?.response?.data?.error?.code === "invalid_base_currency")
+          error = { message: "Invalid value for from" };
+
+        reject(error);
+      }
+    });
+  }
 }
 
 export default ExchangeRatesAPIService;
