@@ -1,73 +1,74 @@
-# Conversor de moedas
+# 💰 Currency Converter
 
-## Comandos para rodar
+## Commands to Run ⚙️
 
-```
+```bash
   npm install
   cp .env.example .env
   npm run dev
 ```
 
-## Urls
+## URLs 🔗
 
-- [Produção](https://gn-coin-converter.onrender.com)
-- [Local](http://localhost:8091)
+- [Production](https://gn-coin-converter.onrender.com) 🌐
+- [Local](http://localhost:8091) 🏠
 
-## Testes
+## Tests ✅
 
-```
+```bash
   npm test
 ```
 
-## Rotas do projeto
+## Project Routes 🗺️
 
-- GET: /api-docs - Swagger da aplicação.
+- GET: /api-docs - Application Swagger. 📖
 
-- POST: /users - Cria usuário com o campo 'name' opcional, 'email' obrigatório e único, 'password' obrigatório.
+- POST: /users - Creates a user with an optional 'name' field, a mandatory and unique 'email' field, and a mandatory 'password' field. 👤
 
-```
+```json
   body: {
-  "name": "Gustavo Neri",
-  "email": "gustavoneri20@hotmail.com",
-  "password": "ABC123def456"
+    "name": "Gustavo Neri",
+    "email": "gustavoneri20@hotmail.com",
+    "password": "ABC123def456"
   }
 ```
 
-- POST: /auth/login - Realiza o login, necessário pegar o token da resposta para usar a rota abaixo, o token expira em 2 horas. Os dois campos para envio são obrigatórios.
+- POST: /auth/login - Performs login, it is necessary to get the token from the response to use the route below. The token expires in 2 hours. Both fields are mandatory. 🔑
 
-```
+```json
   body: {
-  "email": "gustavoneri20@hotmail.com",
-  "password": "ABC123def456"
+    "email": "gustavoneri20@hotmail.com",
+    "password": "ABC123def456"
   }
 ```
 
-- POST: /exchange-rates/convert - Faz a conversão de 'amount' para a moeda inserida em 'from' para 'to'. Os três campos são obrigatórios e é necessário enviar o token de login como autorização Bearer Token.
+- POST: /exchange-rates/convert - Converts 'amount' from the currency entered in 'from' to 'to'. All three fields are mandatory, and it is necessary to send the login token as a Bearer Token authorization. 🔄
 
-```
+```json
   body: {
-  "amount": "50",
-  "from": "BRL",
-  "to": "USD"
+    "amount": "50",
+    "from": "BRL",
+    "to": "USD"
   }
 ```
 
-- GET: /transactions - Lista as transações realizadas pelo usuário informado. O campo 'user_id' é obrigatório.
+- GET: /transactions - Lists the transactions performed by the informed user. The 'user_id' field is mandatory. 🧾
 
-```
+```json
   query params: {
-  "user_id": 1
+    "user_id": 1
   }
 ```
 
-## Sobre o projeto
+## About the Project 💡
 
-Essa API tem como objeto realizar a conversão entre dois valores e salvar essas informações em um banco de dados.
+This API aims to perform the conversion between two values and save this information in a database. 🏦
 
-Utilizei SQLite pois é um banco fácil de se usar em aplicações mais simples e é possível salvar seus dados no projeto, não senti a necessidade usar nenhum ORM nesse projeto.
+I used SQLite because it is an easy database to use in simpler applications, and it is possible to save its data within the project. I didn't use any ORM in this project. 🛠️
 
-Fiz a documentação utilizando o Swagger pela facilidade de sua utilização e pela vantagem de ser fácil de usar seu ambiente visual.
+I did the documentation using Swagger due to its ease of use and the advantage of its user-friendly visual environment. ✍️
 
-Optei por realizar testes utilizando o Jest pela facilidade de sua configuração e é fácil de se aprender.
+I chose to perform tests using Jest due to its easy configuration and learning curve. 🧪
 
-Separei o projeto nessas camadas porque apenas olhar uma vez para o projeto já é possível entender todas as camadas além de ser fácil a implementação de novas features.
+I separated the project into these layers because just looking at the project once makes it possible to understand all the layers, in addition to making it easy to implement new features. 🧱
+```
